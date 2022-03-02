@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ksoft_Blog::ksoft_blog" title="Ksoft Blog" translate="title" module="Ksoft_Blog" sortOrder="100" resource="Ksoft_Blog::ksoft_blog"/>
+        <add id="Ksoft_Blog::ksoft_blog_post" title="Posts" translate="title" module="Ksoft_Blog" sortOrder="115" parent="Ksoft_Blog::ksoft_blog" action="blog/post" resource="Ksoft_Blog::ksoft_blog_post"/>
+        <add id="Ksoft_Blog::ksoft_blog_category" title="Categories" translate="title" module="Ksoft_Blog" sortOrder="130" parent="Ksoft_Blog::ksoft_blog" action="blog/category" resource="Ksoft_Blog::ksoft_blog_category"/>
+        <add id="Ksoft_Blog::ksoft_blog_author" title="Authors" translate="title" module="Ksoft_Blog" sortOrder="145" parent="Ksoft_Blog::ksoft_blog" action="blog/author" resource="Ksoft_Blog::ksoft_blog_author"/>
+    </menu>
+</config>

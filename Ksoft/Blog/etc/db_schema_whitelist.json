@@ -1,0 +1,70 @@
+{
+    "ksoft_blog_posts": {
+        "column": {
+            "post_id": true,
+            "store_id": true,
+            "category_id": true,
+            "author_id": true,
+            "title": true,
+            "post_layout": true,
+            "meta_keywords": true,
+            "meta_description": true,
+            "identifier": true,
+            "content_heading": true,
+            "content": true,
+            "creation_time": true,
+            "update_time": true,
+            "is_active": true,
+            "sort_order": true,
+            "layout_update_xml": true,
+            "custom_theme": true,
+            "custom_root_template": true,
+            "custom_layout_update_xml": true,
+            "layout_update_selected": true,
+            "custom_theme_from": true,
+            "custom_theme_to": true
+        },
+        "index": {
+            "KSOFT_BLOG_POSTS_TITLE_CONTENT_META_KEYWORDS_META_DESCRIPTION": true,
+            "KSOFT_BLOG_POSTS_STORE_ID_CATEGORY_ID_IDENTIFIER": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "KSOFT_BLOG_POSTS_STORE_ID_STORE_STORE_ID": true,
+            "KSOFT_BLOG_POSTS_CATEGORY_ID_KSOFT_BLOG_CATEGORIES_CATEGORY_ID": true,
+            "KSOFT_BLOG_POSTS_AUTHOR_ID_KSOFT_BLOG_AUTHORS_AUTHOR_ID": true
+        }
+    },
+    "ksoft_blog_categories": {
+        "column": {
+            "category_id": true,
+            "store_id": true,
+            "title": true,
+            "content": true,
+            "creation_time": true,
+            "update_time": true,
+            "is_active": true
+        },
+        "index": {
+            "KSOFT_BLOG_CATEGORIES_TITLE_CONTENT": true,
+            "KSOFT_BLOG_CATEGORIES_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "KSOFT_BLOG_CATEGORIES_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "ksoft_blog_authors": {
+        "column": {
+            "author_id": true,
+            "name": true,
+            "email": true,
+            "designation": true,
+            "creation_time": true,
+            "update_time": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

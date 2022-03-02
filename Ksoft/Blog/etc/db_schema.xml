@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="ksoft_blog_posts" resource="default" engine="innodb" comment="Blog Posts Table">
+        <column xsi:type="smallint" name="post_id" unsigned="false" nullable="false" identity="true"
+                comment="Post ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false"
+                comment="Store ID"/>
+        <column xsi:type="smallint" name="category_id" unsigned="false" nullable="false" identity="false"
+                comment="Category ID"/>
+        <column xsi:type="smallint" name="author_id" unsigned="false" nullable="false" identity="false"
+                comment="Author ID"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Post Title"/>
+        <column xsi:type="varchar" name="post_layout" nullable="true" length="255" comment="Post Layout"/>
+        <column xsi:type="text" name="meta_keywords" nullable="true" comment="Post Meta Keywords"/>
+        <column xsi:type="text" name="meta_description" nullable="true" comment="Post Meta Description"/>
+        <column xsi:type="varchar" name="identifier" nullable="true" length="100" comment="Post String Identifier"/>
+        <column xsi:type="varchar" name="content_heading" nullable="true" length="255" comment="Post Content Heading"/>
+        <column xsi:type="mediumtext" name="content" nullable="true" comment="Post Content"/>
+        <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Post Creation Time"/>
+        <column xsi:type="timestamp" name="update_time" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Post Modification Time"/>
+        <column xsi:type="smallint" name="is_active" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Is Post Active"/>
+        <column xsi:type="smallint" name="sort_order" unsigned="false" nullable="true" identity="false"
+                default="0" comment="Post Sort Order"/>
+        <column xsi:type="text" name="layout_update_xml" nullable="true" comment="Post Layout Update Content"/>
+        <column xsi:type="varchar" name="custom_theme" nullable="true" length="100" comment="Post Custom Theme"/>
+        <column xsi:type="varchar" name="custom_root_template" nullable="true" length="255"
+                comment="Post Custom Template"/>
+        <column xsi:type="text" name="custom_layout_update_xml" nullable="true"
+                comment="Post Custom Layout Update Content"/>
+        <column xsi:type="varchar" name="layout_update_selected" nullable="true"
+                length="128" comment="Post Custom Layout File"/>
+        <column xsi:type="date" name="custom_theme_from" comment="Post Custom Theme Active From Date"/>
+        <column xsi:type="date" name="custom_theme_to" comment="Post Custom Theme Active To Date"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="post_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="KSOFT_BLOG_POSTS_STORE_ID_STORE_STORE_ID" table="ksoft_blog_posts"
+                    column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="KSOFT_BLOG_POSTS_CATEGORY_ID_KSOFT_BLOG_CATEGORIES_CATEGORY_ID" table="ksoft_blog_posts"
+                    column="category_id" referenceTable="ksoft_blog_categories" referenceColumn="category_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="KSOFT_BLOG_POSTS_AUTHOR_ID_KSOFT_BLOG_AUTHORS_AUTHOR_ID" table="ksoft_blog_posts"
+                    column="author_id" referenceTable="ksoft_blog_authors" referenceColumn="author_id" onDelete="CASCADE"/>
+        <index referenceId="KSOFT_BLOG_POSTS_TITLE_CONTENT_META_KEYWORDS_META_DESCRIPTION" indexType="fulltext">
+            <column name="title"/>
+            <column name="content"/>
+            <column name="meta_keywords"/>
+            <column name="meta_description"/>
+        </index>
+        <index referenceId="KSOFT_BLOG_POSTS_STORE_ID_CATEGORY_ID_IDENTIFIER" indexType="btree">
+            <column name="store_id"/>
+            <column name="category_id"/>
+            <column name="identifier"/>
+        </index>
+    </table>
+    <table name="ksoft_blog_categories" resource="default" engine="innodb" comment="Ksoft Blog Categories Table">
+        <column xsi:type="smallint" name="category_id" unsigned="false" nullable="false" identity="true"
+                comment="Category ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false"
+                comment="Store ID"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Category Title"/>
+        <column xsi:type="mediumtext" name="content" nullable="true" comment="Category Content"/>
+        <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Category Creation Time"/>
+        <column xsi:type="timestamp" name="update_time" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Category Modification Time"/>
+        <column xsi:type="smallint" name="is_active" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Is Category Active"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="category_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="KSOFT_BLOG_CATEGORIES_STORE_ID_STORE_STORE_ID" table="ksoft_blog_categories"
+                    column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <index referenceId="KSOFT_BLOG_CATEGORIES_TITLE_CONTENT" indexType="fulltext">
+            <column name="title"/>
+            <column name="content"/>
+        </index>
+        <index referenceId="KSOFT_BLOG_CATEGORIES_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+    <table name="ksoft_blog_authors" resource="default" engine="innodb" comment="Ksoft Blog Categories Table">
+        <column xsi:type="smallint" name="author_id" unsigned="false" nullable="false" identity="true"
+                comment="Author ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="50" comment="Author Name"/>
+        <column xsi:type="varchar" name="email" nullable="true" length="50" comment="Author Email"/>
+        <column xsi:type="varchar" name="designation" nullable="true" length="50" comment="Author Designation"/>
+        <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Author Creation Time"/>
+        <column xsi:type="timestamp" name="update_time" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Author Modification Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="author_id"/>
+        </constraint>
+    </table>
+</schema>
